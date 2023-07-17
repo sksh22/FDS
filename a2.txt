@@ -1,0 +1,70 @@
+def average(student_marks, student_num):
+    sum = 0
+    for marks in student_marks:
+        if marks != -1:
+            sum += marks
+    avg = sum / student_num
+    return avg
+
+
+def highest_lowest_marks(student_marks):
+    max = 0
+    min = 100
+    for marks in student_marks:
+        if max < marks:
+            max = marks
+        if (min > marks) and (marks != -1):
+            min = marks
+    return max, min
+
+
+def absent_students(student_marks):
+    count = 0
+    for marks in student_marks:
+        if marks == -1:
+            count += 1
+    return count
+
+
+def highest_frequency(student_marks): 
+    frequency = 0
+    max, min = highest_lowest_marks(student_marks)
+    for marks in student_marks:
+        if max == marks:
+            frequency += 1
+    return max, frequency
+
+
+student_marks = []
+student_num = int(input("Enter total number of students "))
+for i in range(student_num):
+    student_marks.append(int(input(f"Enter FDS marks of student {i+1} (for absent students enter -1) :")))
+
+while True:
+    print('''
+    ------ ------ ------ ------ ------ MENU ------ ------ ------ ------ ------ 
+    
+    1. Enter 1 for average score of class
+    2. Enter 2 for highest and lowest score of class
+    3. Enter 3 for counting number of absent students for the test
+    4. Enter 4 to display marks with highest frequency
+    5. Enter 5 to Exit
+    ''')
+    choice = int(input("Enter you choice:"))
+    if choice == 1:
+        print("Average score of the class is ", average(student_marks, student_num))
+    elif choice == 2:
+        max, min = highest_lowest_marks(student_marks)
+        print("Highest Score of the class is ", max)
+        print("Lowest Score of the class is ", min)
+    elif choice == 3:
+        print("Number of Students who were absent for the test are ", absent_students(student_marks))
+    elif choice == 4:
+        max, frequency = highest_frequency(student_marks)
+        print(max, " are the highest marks with frequency ", frequency)
+    elif choice == 5:
+        print("Thank you!!!")
+        break
+    else:
+        print("Enter a valid choice")
+ 

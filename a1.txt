@@ -1,0 +1,72 @@
+C=[]
+B=[]
+F=[]
+
+c=int(input("enter no. of students who play cricket"))
+for i in range(c):
+    x=int(input("enter roll no."))
+    C.append(x)
+print("list of students who play cricket:",C)
+
+b=int(input("enter no. of students who play badminton"))
+for i in range(b):
+    x=int(input("enter roll no."))
+    B.append(x)
+print("list of students who play badminton:",B)
+
+f=int(input("enter no. of students who play football"))
+for i in range(f):
+    x=int(input("enter roll no."))
+    F.append(x)
+print("list of students who play football:",F)
+
+u=[]
+u.extend(C)
+for i in B:
+    if i not in u:
+        u.append(i)
+for j in F:
+    if j not in u:
+        u.append(j)
+print("universal set",u)
+        
+r=[]
+def cri_bad():
+    for i in C:
+        for j in B:
+            if i==j:
+                r.append(i)
+    print("..",r)
+cri_bad()
+    
+d=[]
+def cri_or_bad():
+    for i in C:
+        if i not in r:
+            d.append(i)
+    for j in B:
+        if j not in r:
+            d.append(j)
+    print("xyz",d)
+cri_or_bad()
+
+def n_cribad():
+    q=[]
+    e=[]
+    q.extend(C)
+    for i in B:
+        if i not in C:
+            q.append(i)
+    for j in u:
+        if j not in q:
+            e.append(j)
+    print("ee",e)
+n_cribad()
+
+k=[]
+def c_f_nb():
+    for i in u:
+        if i not in B:
+            k.append(i)
+    print(k)
+c_f_nb()

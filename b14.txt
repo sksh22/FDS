@@ -1,0 +1,64 @@
+
+def selection_sort(a):
+    n = len(a)
+    for i in range(0, n - 1):
+        mini = i
+        for j in range(i, n):
+            if a[j] < a[mini]:
+                mini = j
+        temp = a[i]
+        a[i] = a[mini]
+        a[mini] = temp
+    print(a)
+    print("Top Five Scores are...")
+    for i in range(n - 1, n - 6, -1):
+        print(a[i], end=" ")
+
+
+def bubble_sort(a):
+    n = len(a)
+    for i in range(0, n - 1):
+        check = False
+        for j in range(0, n -1):
+            if a[j] > a[j + 1]:
+                temp = a[j + 1]
+                a[j + 1] = a[j]
+                a[j] = temp
+                check = True
+            if not check:
+                break
+    print(a)
+    print("Top Five Scores are...")
+    for i in range(n - 1, n - 6,-1):
+        print(a[i], end=" ")
+
+
+array = []
+stud_num = int(input("Enter number of students: "))
+for i in range(stud_num):
+    array.append(float(input(f"Enter percentage of student {i+1}: ")))
+
+print("Percentage of students are (unsorted): ")
+for i in array:
+    print(i, end=" ")
+
+while True:
+    print('''
+    ------ ------ ------ ------ ------ MENU ------ ------ ------ ------ ------ 
+
+    1. Enter 1 for Selection Sort
+    2. Enter 2 for Bubble Sort
+    3. Enter 3 to Exit
+    ''')
+    choice = int(input("Enter you choice:"))
+    if choice == 1:
+        print("Using Selection Sort: ")
+        selection_sort(array)
+    elif choice == 2:
+        print("Using Bubble sort: ")
+        bubble_sort(array)
+    elif choice == 3:
+        print("Thank you!!!")
+        break
+    else:
+        print("Enter a valid choice")

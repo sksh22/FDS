@@ -1,0 +1,171 @@
+‘’’butterscotch’’’
+#include <iostream>
+using namespace std;
+class node
+{
+public:
+    int data;
+    node *next;
+    node()
+    {
+        next = NULL;
+    }
+    node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+int setmaking(node *head, int val)
+{
+    node *temp = new node;
+    temp = head;
+    int index = 0;
+    while (temp != NULL)
+    {
+        if (temp->data == val)
+        {
+            return index;
+        }
+        index++;
+        temp = temp->next;
+    }
+    return -1;
+}
+void addingset(node *&head, int val)
+{
+    if (setmaking(head, val) == -1)
+    {
+        node *temp = new node();
+        temp = head;
+        node *newnode = new node(val);
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = newnode;
+    }
+}
+void display(node *head)
+{
+    node *temp = new node;
+    temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+void inputing(node *&head, string flavour)
+{
+    int n, rollno;
+    cout << "ENTER THE NUMBERS OF STUDENTS WHO LIKE " << flavour << "ICECREAM : ";
+                       cin >>n;
+    cout << "ENTER ROLL.NO OF THAT STUDENT:" << endl;
+    cin >> rollno;
+    head = new node(rollno);
+    for (int i = 1; i < n; i++)
+    {
+        cin >> rollno;
+        addingset(head, rollno);
+    }
+}
+void set_only_one(node *set1, node *set2)
+{
+    node *temp = new node;
+    temp = set1;
+    while (temp != NULL)
+    {
+        if (setmaking(set2, temp->data) == -1)
+        {
+            cout << temp->data << " ";
+        }
+        temp = temp->next;
+    }
+    node *temp2 = new node;
+    temp2 = set2;
+    while (temp2 != NULL)
+    {
+        if (setmaking(set1, temp2->data) == -1)
+        {
+            cout << temp2->data << " ";
+        }
+        temp2 = temp2->next;
+    }
+    cout << endl;
+}
+void intersection(node *set1, node *set2)
+{
+    node *temp = new node;
+    temp = set1;
+    while (temp != NULL)
+    {
+        if (setmaking(set2, temp->data) != -1)
+        {
+            cout << temp->data << " ";
+        }
+        temp = temp->next;
+    }
+    cout << endl;
+}
+int neithernor(node *set1, node *set2, int total)
+{
+    int count = 0;
+    for (int i = 1; i <= total; i++)
+    {
+        if ((setmaking(set1, i) != -1) and (setmaking(set2, i) != -1))
+        {
+            count++;
+        }
+    }
+    return count;
+}
+int main()
+{
+    node *seta;
+    node *setb;
+    int choice, t;
+    bool i = true;
+    cout << "ENTER TOTAL NUMBER OF STUDENTS:";
+    cin >> t;
+    inputing(seta, "VANILLA");
+    inputing(setb, "BUTTERSCOTCH");
+    while (i)
+    {
+        cout << "1.DISPLAY UR DATA" << endl;
+        cout << "2. SET OF STUDENTS WHO LIKE BOTH VANILLA AND BUTTERSCOTCH ICECREAM " << endl;
+            cout<< "3. SET OF STUDENTS WHO EITHER LIKE VANILLA OR BUTTERSCOTCH,NOT BOTH " << endl;
+                cout<< "4. SET OF STUDENTS WHO NEITHER LIKE VANILLA NOR BUTTERSCOTCH"<< endl;
+        cout << "5. EXIT" << endl;
+        cout << "ENTER YOUR CHOICE:";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "STUDENTS WHO LIKE VANILLA FLAVOUR ARE:";
+            display(seta);
+            cout << "STUDENTS WHO LIKE BUTTERSCOTCH FLAVOUR ARE: ";
+            display(setb);
+            break;
+        case 2:
+            cout << "ROLL.NO OF STUDENTS WHO LIKE BOTH VANILLA AND BUTTERSCOTCH ICECREAM ARE : " << endl;
+                                            intersection(seta, setb);
+            break;
+        case 3:
+            cout << "ROLL.NO OF STUDENTS WHO EITHER LIKE VANILLA OR BUTTERSCOTCH, NOT BOTH " << endl;
+             set_only_one(seta, setb);
+            break;
+        case 4:
+            cout << "SET OF STUDENTS WHO NEITHER LIKE VANILLA NOR BUTTERSCOTCH ARE : " << neithernor(seta, setb, t) << endl;
+                      break;
+        case 5:
+            i = false;
+            break;
+        default:
+            cout << "ENTER VALID CHOICE" << endl;
+            break;
+        }
+    }
+    return 0;
+}
